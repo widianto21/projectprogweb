@@ -13,7 +13,7 @@
 		<div class="dropdown">
 	  		<button class="dropbtn">Poliklinik</button>
 	  		<div class="dropdown-content">
-			    <a href="#">Input Poliklinik</a>
+			    <a href="<?php echo base_url();?>admin/show_input_poliklinik">Input Poliklinik</a>
 			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Manage Poliklinik</a>
 	  		</div>
 		</div>

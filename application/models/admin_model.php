@@ -22,8 +22,49 @@
 			}	
 		}
 		function get_list_poli(){
-			$this->db->selec('*');
+			$this->db->select('*');
 			$this->db->from('poliklinik');
+			$list = $this->db->get();
+			if($list->num_rows() > 0){
+				return $list->result_array();
+			}else{
+				return "kosong";
+			}
+		}
+		function get_specific_poli($data){
+			$this->db->select('*');
+			$this->db->from('poliklinik');
+			$this->db->like('id_poliklinik', $data);
+			$list = $this->db->get();
+			if($list->num_rows() > 0){
+				return $list->result_array();
+			}else{
+				return "kosong";
+			}	
+		}
+		function generate_idpoli(){
+			$this->db->select('*');
+			$this->db->from('poliklinik');
+			$list = $this->db->get();
+			if($list->num_rows() == 0){
+				return "pol001";
+			}
+			else{
+				$kode = (string)$list->num_rows()+1;
+				if((strlen((string)$list->num_rows())) < 3){
+					for($i = strlen((string)$list->num_rows()); $i < 3; $i++){
+						$kode = "0".$kode;
+					}
+				}
+				$kode = "pol".$kode;
+				return $kode;
+			}
+		}
+		function insert_poli($data){
+			$this->db->insert('poliklinik', $data);
+		}
+		function delete_poli($idpoli){
+			$this->db->delete('poliklinik', array('ID_POLIKLINIK'=>$idpoli));
 		}
 	}
 ?>

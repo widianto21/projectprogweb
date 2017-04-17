@@ -43,8 +43,6 @@
 		document.getElementById("search").value="isi";
 	}
 </script>
-
-
 <article class="topcontent">
 	<header><h2>Management User - > Input User</h2></header>
 	<content>
