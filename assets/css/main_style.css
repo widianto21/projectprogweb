@@ -1,0 +1,328 @@
+body{
+	background-image: url('BG2.png');
+	color: #000305;
+	font-size: 87.5%;
+	font-family:  Arial, Lucida Sans Unicode;
+	line-height: 1.5;
+	text-align: left;
+}
+
+a {
+	text-decoration: none;
+}
+
+a,a:link,a:visited{
+	color: #4CAF50;
+}
+
+a:hover, a:active{
+	background-color: #4CAF50;
+	color: #FFF;
+}
+
+.body{
+	margin: 0 auto;
+	width: 75%;
+	clear:both;
+}
+
+.mainheader img{
+	width: 8%;
+	float: right;
+}
+
+.mainheader .logout{
+	float: right;
+	background-color: #F90;
+}
+
+.mainheader nav{
+	background-color: #666;
+	height: 40px;
+	margin-top: 1.2%;
+/*	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;*/
+}
+.mainheader nav ul{
+	list-style: none;
+	margin: 0 auto;
+
+}
+
+.mainheader nav ul li{
+	float: left;
+	display: inline;
+}
+
+.mainheader nav a:link, .mainheader nav a:visited{
+	color: #FFF;
+	display: inline-block;
+	padding: 10px 25px;
+	height: 20px;
+}
+
+.mainheader nav a:hover, .mainheader nav a:active, 
+.mainheader nav .active a:link, .mainheader nav .active a:visited{
+	background-color: #4CAF50;
+	text-shadow: none;
+}
+
+.mainheader nav ul li a{
+/*	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	*/
+}
+
+
+.mainContent{
+	line-height: 25px;
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;*/
+}
+
+.container{
+	background-color: #FFF;
+}
+
+.content{
+	margin-top: 1%;
+	width: 79%;
+	float: right;
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;*/
+}
+
+.topcontent{
+	background-color: #FFF;
+/*	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	*/
+	padding: .5% 1.5%;
+}
+
+/*.bottomcontent{
+	background-color: #FFF;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	padding: 3% 5%;	
+	margin-top: 2%;
+}*/
+
+.top-sidebar{
+	width: 18%;
+	float: left;
+	background-color: #FFF;
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	*/
+	margin-right: 1%;
+	margin-bottom: 3%;
+	margin-top: 1%;
+	padding: 1% 1%;
+}
+.post-info{
+	font-style: italic;
+	color : #999;
+	font-size: 85%;
+}
+
+/*.middle-sidebar{
+	width: 21%;
+	float: left;
+	background-color: #FFF;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	margin-left: 3%;
+	margin-bottom: 3%;
+	margin-top: 2%;
+	padding: 2% 3%;
+}
+
+.bottom-sidebar{
+	width: 21%;
+	float: left;
+	background-color: #FFF;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	margin-left: 3%;
+	margin-bottom: 3%;
+	margin-top: 2%;
+	padding: 2% 3%;
+}*/
+
+.mainfooter{
+	width: 100%;
+	float: left;
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	*/
+	background-color: #666;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.mainfooter p{
+	width: 92%;
+	margin: 1% auto;
+	color: #FFF;
+}
+/*.vertical-menu {
+    width: 100%; /* Set a width if you like */
+/*}*/
+
+/*.vertical-menu a {*/
+    /*background-color: #999;  Grey background color */
+    /*color: black;  Black text color */
+    /*display: block;  Make the links appear below each other */
+    /*padding: 12px;  Add some padding */
+    /*text-decoration: none;  Remove underline from links */
+/*}*/
+
+/*.vertical-menu a:hover {*/
+    /*background-color: #ccc;  Dark grey background on mouse-over */
+/*}*/
+
+/*.vertical-menu a.active {*/
+    /*background-color: #4CAF50;  Add a green color to the "active/current" link */
+    /*color: white;*/
+/*}*/
+ /* Dropdown Button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 10px;
+    width: 178px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border: 1px #999 solid;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 100%;	
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    min-width: 10%;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+input[type=text] {
+    width: 50%;
+    min-width: 25%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=password] {
+    width: 50%;
+    min-width: 25%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.search{
+    min-width: 10%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;	
+}
+
+.input_table{
+	width: 100%;
+	margin: 1% auto;
+}
+
+.input_table th,td{
+    padding: 8px;
+    min-width: 10%;	
+}
+
+table td.title{
+	min-width: 3%;	
+    width: 3.5%;
+}
+
+.input_table th{
+	text-align: center;
+}
+
+select{
+	min-width: 25%;
+	width: 50%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;		
+}
+
+textarea{
+    min-width: 25%;
+	width: 75%;
+	resize: none;
+    margin: 8px 0;
+    box-sizing: border-box;		
+}
+
+input[type="submit"]{
+	background-color: #008CBA;
+	border: none;
+	color: white;
+	padding: 10px 30px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 4px;
+}
