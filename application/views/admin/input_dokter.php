@@ -4,7 +4,7 @@
 	</tr>
 	<tr>	
 		<td class="title"><label>ID Dokter</label></td>
-		<td><input type="text" name="txtId"/></td>
+		<td><input type="text" name="txtId" readonly="readonly" value="<?php echo $id_dokter;?>" /></td>
 	</tr>
 	<tr>
 		<td class="title"><label>Nama</label></td>

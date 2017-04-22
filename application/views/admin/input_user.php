@@ -12,12 +12,14 @@
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
+			document.getElementById("form_input").action="<?php echo base_url();?>admin/input_data_perawat";
 		}
 		else if(STR == "dokter"){
 			url = "<?php echo base_url();?>admin/show_input_dokter";
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
+			document.getElementById("form_input").action="<?php echo base_url();?>admin/input_data_dokter";
 		}
 	}
 	function stateChanged(){
@@ -43,13 +45,11 @@
 		document.getElementById("search").value="isi";
 	}
 </script>
-
-
 <article class="topcontent">
 	<header><h2>Management User - > Input User</h2></header>
 	<content>
 		<div class="input_table">
-			<form method="post">
+			<form method="post" id="form_input">
 			<table>
 				<tr>
 					<th colspan="2">Jenis User</th>

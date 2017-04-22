@@ -11,10 +11,11 @@
 	  		</div>
 		</div>
 		<div class="dropdown">
-	  		<button class="dropbtn">Poliklinik</button>
+	  		<button class="dropbtn">Data Dokter</button>
 	  		<div class="dropdown-content">
-			    <a href="#">Input Poliklinik</a>
-			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Manage Poliklinik</a>
+			    <a href="<?php echo base_url();?>admin/show_input_poliklinik">Manage Data Dokter</a>
+			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Input Jadwal</a>
+			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Manage Jadwal</a>
 	  		</div>
 		</div>
 		<div class="dropdown">

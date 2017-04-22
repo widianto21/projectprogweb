@@ -6,15 +6,25 @@
 			$this->load->model('admin_model');
 		}
 
+		//function index
+
 		function index(){
-			$this->load->view('template/header');
-			$this->load->view('admin/edituser');
-			$this->load->view('template/footer');
+			$this->show_view_user();
 		}
 
-		function get_data_poliklinik(){
-			// $list = $this->admin_model->get
-		}
+		// function input data
+
+		// end function input data
+
+		// update data
+		
+		// end update data
+
+		// function delete
+
+		// end function delete
+
+		//function get_data
 
 		function get_data_user(){
 			$list = $this->admin_model->get_list_user();
@@ -30,7 +40,7 @@
 						<td>".$row['id']."</td>
 						<td>".$row['nama']."</td>
 						<td>".$row['tipe']."</td>
-						<td>EDIT | UPDATE</td>								
+						<td>EDIT | DELETE</td>								
 					</tr>";
 			}
 			echo "</table>";
@@ -51,7 +61,7 @@
 							<td>".$row['id']."</td>
 							<td>".$row['nama']."</td>
 							<td>".$row['tipe']."</td>
-							<td>EDIT | UPDATE</td>								
+							<td>EDIT | DELETE</td>								
 						</tr>";
 				}
 				echo "</table>";
@@ -60,14 +70,9 @@
 			}			
 		}
 
-		
+		// end funciton get_data
 
-		function show_view_user(){
-			$this->load->view('template/header');
-			$this->load->view('admin/nav_admin');
-			$this->load->view('admin/edituser');
-			$this->load->view('template/footer');
-		}
+		// show function
 
 		function show_input_user(){
 			$this->load->view('template/header');
@@ -77,13 +82,32 @@
 		}
 
 		function show_input_perawat(){
-			$this->load->view('admin/input_perawat');
-			$this->load->view('admin/input_data_user');
+			echo "<table>";
+			$data['id_user'] = $this->admin_model->generate_id_user();
+			$this->load->view('admin/input_data_user',$data);
 		}
 
 		function show_input_dokter(){
-			$this->load->view('admin/input_dokter');
-			$this->load->view('admin/input_data_user');
+			$data['id_dokter'] = $this->admin_model->generate_id_dokter();
+			$this->load->view('admin/input_dokter', $data);
+			$data['id_user'] = $this->admin_model->generate_id_user();
+			$this->load->view('admin/input_data_user',$data);
+		}
+
+		function show_view_user(){
+			$this->load->view('template/header');
+			$this->load->view('admin/nav_admin');
+			$this->load->view('admin/edituser');
+			$this->load->view('template/footer');
+		}
+
+		function show_input_poliklinik($res = null){
+			$data['kode'] = $this->admin_model->generate_idpoli();
+			if($res != null)$data['res'] = $res;
+			$this->load->view('template/header');
+			$this->load->view('admin/nav_admin');
+			$this->load->view('admin/input_poliklinik', $data);
+			$this->load->view('template/footer');
 		}
 
 		function show_view_poliklinik(){
@@ -93,7 +117,16 @@
 			$this->load->view('template/footer');
 		}
 
-	
+		function show_update_poliklinik($kode){
+			$data['result'] = $this->admin_model->get_specific_poli($kode);
+			$this->load->view('template/header');
+			$this->load->view('admin/nav_admin');
+			$this->load->view('admin/update_data_poli', $data);
+			$this->load->view('template/footer');
+		}
+		// end show function
+
+		//function check session
 		public function check_session(){
 			if(isset($this->session->userdata['logged_in'])){
 				if($this->session->userdata['logged_in']['tipe'] != "admin"){
@@ -104,6 +137,7 @@
 			}
 		}
 
+		//function logout
 		function logout(){
 			$this->session->sess_destroy();
 			$this->check_session();

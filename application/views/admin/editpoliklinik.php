@@ -9,13 +9,13 @@
 		}
 		var url = "";
 		if(!STR){
-			url = "<?php echo base_url();?>admin/get_data_user";
+			url = "<?php echo base_url();?>admin/get_data_poli";
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
 		}
 		else{
-			url = "<?php echo base_url();?>admin/get_single_user		/" + STR;
+			url = "<?php echo base_url();?>admin/get_single_poli/" + STR;
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
@@ -45,7 +45,7 @@
 	}
 </script>
 <article class="topcontent">
-	<header><h2>Management User - > view User</h2></header>
+	<header><h2>Manage Poliklinik -> View Poliklinik</h2></header>
 	<content>
 			CARI <input type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value)" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
 		<div id="result">

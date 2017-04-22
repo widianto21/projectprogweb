@@ -3,7 +3,7 @@
 	</tr>
 	<tr>
 		<td class="title"><label>ID User</label></td>
-		<td><input type="text" name="txtIDUser"/></td>
+		<td><input type="text" name="txtIDUser" readonly="readonly" value="<?php echo $id_user;?>"/></td>
 	</tr>
 	<tr>
 		<td class="title"><label>Username</label></td>
