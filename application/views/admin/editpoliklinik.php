@@ -43,12 +43,20 @@
 	function check(){
 		document.getElementById("search").value="isi";
 	}
+	function delete_poli(ID_Poli){
+		if(confirm("Apakah yakin ingin menghapus data dengan id : " + ID_Poli + " ? ") == true){
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
 <article class="topcontent">
 	<header><h2>Manage Poliklinik -> View Poliklinik</h2></header>
 	<content>
-			CARI <input type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value)" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
-		<div id="result">
+		<button class="dropbtn" onclick="location.href='<?php echo base_url();?>admin/show_input_poliklinik';">Tambah Data</button>
+
+		<div id="result" style="margin-top:10px;">
 		</div>
 	</content>
 </article>

@@ -23,9 +23,8 @@
 			$res = $this->login_model->login($data);
 			if($res != null){
 				$session_data = array(
-					'username' => $res[0]['username'],
-					'nama' => $res[0]['nama'],
-					'tipe' => $res[0]['tipe']);
+					'username' => $res[0]['USERNAME'],
+					'tipe' => $res[0]['TIPE']);
 				$this->session->set_userdata('logged_in', $session_data);
 				$view = $this->session->userdata['logged_in']['tipe'];
 				echo $view;

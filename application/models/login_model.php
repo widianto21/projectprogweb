@@ -1,7 +1,7 @@
 <?php
 	class login_model extends CI_Model{
 		public function registration_insert($data){
-			$condition = "username='".$data['username']."'";
+			$condition = "USERNAME='".$data['username']."'";
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->where($condition);

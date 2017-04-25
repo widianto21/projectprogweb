@@ -15,7 +15,7 @@
 			document.getElementById("form_input").action="<?php echo base_url();?>admin/input_data_perawat";
 		}
 		else if(STR == "dokter"){
-			url = "<?php echo base_url();?>admin/show_input_dokter";
+			url = "<?php ";
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
@@ -51,12 +51,22 @@
 		<div class="input_table">
 			<form method="post" id="form_input">
 			<table>
+
 				<tr>
 					<th colspan="2">Jenis User</th>
 				</tr>
 				<tr>
-					<td><input type="radio" name="rbJenis" value="perawat" onclick="get_input(this.value);">Perawat</input></td>
-					<td><input type="radio" name="rbJenis" value="dokter" onclick="get_input(this.value);">Dokter</input></td>
+					<?php 
+						if(isset($tipe)){
+							if($tipe == TRUE){
+								echo "<script>get_input('".$tipe."');</script>";
+							}
+						}
+
+					?>
+					<td><input type="radio" name="rbJeni	s" value="perawat" onclick="get_input(this.value);" onload="get_input(this.value);" <?php if(isset($tipe)){if($tipe == "perawat"){echo "checked=\"checked\"";}}
+					?>>Perawat</input></td>
+					<td><input type="radio" name="rbJenis" value="dokter" onclick="get_input(this.value);" <?php if(isset($tipe)){if($tipe == "dokter"){echo "checked=\"checked\"";}}?>>Dokter</input></td>
 				</tr>
 			</table>
 			<div id="result"></div>

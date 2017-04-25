@@ -4,19 +4,23 @@
 	  		<button class="dropbtn" onclick="location.href='<?php echo base_url();?>admin';">Home</button>
 		</div>
 		<div class="dropdown">
-	  		<button class="dropbtn">Management User</button>
+	  		<button class="dropbtn">User</button>
 	  		<div class="dropdown-content">
-			    <a href="<?php echo base_url();?>admin/show_input_user">Input Akun</a>
+			    <a href="<?php echo base_url();?>admin/show_input_dokter">Input Dokter</a>
+			    <a href="<?php echo base_url();?>admin/show_input_perawat">Input Perawat</a>
 			    <a href="<?php echo base_url();?>admin/show_view_user">Manage Akun User</a>
 	  		</div>
 		</div>
 		<div class="dropdown">
-	  		<button class="dropbtn">Data Dokter</button>
+	  		<button class="dropbtn">Dokter</button>
 	  		<div class="dropdown-content">
 			    <a href="<?php echo base_url();?>admin/show_input_poliklinik">Manage Data Dokter</a>
 			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Input Jadwal</a>
 			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Manage Jadwal</a>
 	  		</div>
+		</div>
+		<div class="dropdown">
+	  		<button class="dropbtn" onclick="location.href='<?php echo base_url();?>admin/show_view_poliklinik';">Poliklinik</button>
 		</div>
 		<div class="dropdown">
 	  		<button class="dropbtn">Jadwal Praktek</button>
