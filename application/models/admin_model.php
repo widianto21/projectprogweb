@@ -11,14 +11,52 @@
 				return "kosong";
 			}
 		}
+
+		function get_list_dokter(){
+			$this->db->select('*');
+			$this->db->from('dokter');
+			$this->db->join('poliklinik', 'dokter.ID_POLI=poliklinik.ID_POLI');
+			$list = $this->db->get();
+			if($list->num_rows() > 0){
+				return $list->result_array();
+			}else{
+				return "kosong";
+			}
+		}
 		
+		function get_list_jadwal($ID_DOKTER){
+			$this->db->select('*');
+			$this->db->from('jadwal as J');
+			$this->db->join('dokter as D', 'J.ID_DOKTER=D.ID_DOKTER');
+			$this->db->where('D.ID_DOKTER', $ID_DOKTER);
+			$list = $this->db->get();
+			if($list->num_rows() > 0){
+				return $list->result_array();
+			}else{
+				return "kosong";
+			}
+		}
+
+		function get_list_jam(){
+			$this->db->select('*');
+			$this->db->from('jam');
+			$list = $this->db->get();
+			if($list->num_rows > 0){
+				return $list->result_array();
+			}else{
+				return "kosong";
+			}
+		}
+
 		function get_specific_user($data){
 			$this->db->select('*');
 			$this->db->from('users');
 			$this->db->like('ID_USER', $data);
+			$this->db->or_like('ID_POLIKLINIK', $data);
+			$this->db->or_like('USERNAME', $data);
 			$list = $this->db->get();
 			if($list->num_rows() > 0){
-				return $list->row_array();
+				return $list->result_array();
 			}else{
 				return "kosong";
 			}	
@@ -26,11 +64,18 @@
 		
 		function get_specific_dokter($data){
 			$this->db->select('*');
-			$this->db->from('dokter');
+			$this->db->from('dokter as D');
+			$this->db->join('users as U', 'U.ID_POLIKLINIK=D.ID_DOKTER','INNER');
+			$this->db->join('poliklinik as P', 'D.ID_POLI=P.ID_POLI', 'INNER');
 			$this->db->like('ID_DOKTER', $data);
+			$this->db->or_like('NAMA', $data);
+			$this->db->or_like('ALAMAT', $data);
+			$this->db->or_like('NO_TELP', $data);
+			$this->db->or_like('D.ID_POLI', $data);
+			$this->db->or_like('P.NAMA_POLI', $data);
 			$list = $this->db->get();
 			if($list->num_rows() > 0){
-				return $list->row_array();
+				return $list->result_array();
 			}else{
 				return "kosong";
 			}	
@@ -38,11 +83,11 @@
 
 		function get_specific_perawat($data){
 			$this->db->select('*');
-			$this->db->from('dokter');
-			$this->db->like('ID_DOKTER', $data);
+			$this->db->from('perawat');
+			$this->db->like('ID_PERAWAT', $data);
 			$list = $this->db->get();
 			if($list->num_rows() > 0){
-				return $list->row_array();
+				return $list->result_array();
 			}else{
 				return "kosong";
 			}	
@@ -56,13 +101,38 @@
 				return "USR001";
 			}
 			else{
-				$kode = (string)$list->num_rows()+1;
-				if((strlen((string)$list->num_rows())) < 3){
+				$data = $list->result();
+				$kode = (int)substr($data[$list->num_rows-1]->ID_USER,3);
+				$kode++;
+				// $kode = (string)$list->num_rows()+1;
+				// if((strlen((string)$list->num_rows())) < 3){
 					for($i = strlen((string)$list->num_rows()); $i < 3; $i++){
 						$kode = "0".$kode;
 					}
-				}
+				// }
 				$kode = "USR".$kode;
+				return $kode;
+			}
+		}
+
+		function generate_id_jadwal(){
+			$this->db->select('*');
+			$this->db->from('jadwal');
+			$list = $this->db->get();
+			if($list->num_rows() == 0){
+				return "JDW001";
+			}
+			else{
+				$data = $list->result();
+				$kode = (int)substr($data[$list->num_rows-1]->ID_USER,3);
+				$kode++;
+				// $kode = (string)$list->num_rows()+1;
+				// if((strlen((string)$list->num_rows())) < 3){
+					for($i = strlen((string)$list->num_rows()); $i < 3; $i++){
+						$kode = "0".$kode;
+					}
+				// }
+				$kode = "JDW".$kode;
 				return $kode;
 			}
 		}
@@ -98,13 +168,32 @@
 				return "POL001";
 			}
 			else{
-				$kode = (string)$list->num_rows()+1;
-				if((strlen((string)$list->num_rows())) < 3){
+				$data = $list->result();
+				$kode = (int)substr($data[$list->num_rows-1]->ID_POLI,3);
+				$kode++;
 					for($i = strlen((string)$list->num_rows()); $i < 3; $i++){
 						$kode = "0".$kode;
 					}
-				}
 				$kode = "POL".$kode;
+				return $kode;
+			}
+		}
+
+		function generate_id_jam(){
+			$this->db->select('*');
+			$this->db->from('jam');
+			$list = $this->db->get();
+			if($list->num_rows() == 0){
+				return "J01";
+			}
+			else{
+				$data = $list->result();
+				$kode = (int)substr($data[$list->num_rows-1]->ID_POLI,1);
+				$kode++;
+					for($i = strlen((string)$list->num_rows()); $i < 2; $i++){
+						$kode = "0".$kode;
+					}
+				$kode = "j".$kode;
 				return $kode;
 			}
 		}
@@ -117,12 +206,15 @@
 				return "DOK001";
 			}
 			else{
-				$kode = (string)$list->num_rows()+1;
-				if((strlen((string)$list->num_rows())) < 3){
+				$data = $list->result();
+				$kode = (int)substr($data[$list->num_rows-1]->ID_DOKTER,3);
+				$kode++;
+				// $kode = (string)$list->num_rows()+1;
+				// if((strlen((string)$list->num_rows())) < 3){
 					for($i = strlen((string)$list->num_rows()); $i < 3; $i++){
 						$kode = "0".$kode;
 					}
-				}
+				// }
 				$kode = "DOK".$kode;
 				return $kode;
 			}
@@ -167,8 +259,8 @@
 			return $this->db->affected_rows() > 0;
 		}
 
-		function delete_user($id_user){
-			$this->db->delete('users', array('ID_USER'=>$id_users));
+		function delete_user($id_poli){
+			$this->db->delete('users', array('ID_POLIKLINIK'=>$id_poli));
 			return $this->db->affected_rows() > 0;
 		}
 

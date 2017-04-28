@@ -6,17 +6,17 @@
 		<div class="dropdown">
 	  		<button class="dropbtn">User</button>
 	  		<div class="dropdown-content">
+			    <a href="<?php echo base_url();?>admin/show_view_user">Data User</a>
 			    <a href="<?php echo base_url();?>admin/show_input_dokter">Input Dokter</a>
 			    <a href="<?php echo base_url();?>admin/show_input_perawat">Input Perawat</a>
-			    <a href="<?php echo base_url();?>admin/show_view_user">Manage Akun User</a>
 	  		</div>
 		</div>
 		<div class="dropdown">
-	  		<button class="dropbtn">Dokter</button>
+	  		<button class="dropbtn" onclick="location.href='<?php echo base_url();?>admin/show_view_dokter';">Dokter</button>
 	  		<div class="dropdown-content">
-			    <a href="<?php echo base_url();?>admin/show_input_poliklinik">Manage Data Dokter</a>
-			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Input Jadwal</a>
-			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Manage Jadwal</a>
+			    <!-- <a href="<?php echo base_url();?>admin/show_view_dokter">Data Dokter</a> -->
+			    <!-- <a href="<?php echo base_url();?>admin/show_view_jam">Jam Praktek</a>
+			    <a href="<?php echo base_url();?>admin/show_view_poliklinik">Manage Jadwal</a> -->
 	  		</div>
 		</div>
 		<div class="dropdown">

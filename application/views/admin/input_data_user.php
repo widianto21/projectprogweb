@@ -7,11 +7,11 @@
 			</tr>
 			<tr>
 				<td class="title"><label>Username</label></td>
-				<td><input type="text" name="txtUsername" value="<?php echo set_value('txtUsername')?>"/><?php echo form_error('txtUsername');?></td>
+				<td><input type="text" name="txtUsername" value="<?php if(!isset($msg))echo set_value('txtUsername')?>"/><?php echo form_error('txtUsername');?></td>
 			</tr>
 			<tr>
 				<td class="title"><label>Password</label></td>
-				<td><input type="password" name="txtPassword" value="<?php echo set_value('txtUsername')?>"/><?php echo form_error('txtPassword');?></td>
+				<td><input type="password" name="txtPassword" value="<?php if(!isset($msg))echo set_value('txtUsername')?>"/><?php echo form_error('txtPassword');?></td>
 			</tr>
 			<tr>
 				<td class="title"><label>Tipe</label></td>

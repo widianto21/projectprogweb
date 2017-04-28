@@ -9,13 +9,13 @@
 		}
 		var url = "";
 		if(!STR){
-			url = "<?php echo base_url();?>admin/get_data_poli";
+			url = "<?php echo base_url();?>admin/get_data_jam";
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
 		}
 		else{
-			url = "<?php echo base_url();?>admin/get_single_poli/" + STR;
+			url = "<?php echo base_url();?>admin/get_single_jam/" + STR;
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
@@ -43,18 +43,11 @@
 	function check(){
 		document.getElementById("search").value="isi";
 	}
-	function delete_poli(ID_Poli){
-		if(confirm("Apakah yakin ingin menghapus data dengan id : " + ID_Poli + " ? ") == true){
-			return true;
-		}else{
-			return false;
-		}
-	}
 </script>
 <article class="topcontent">
-	<header><h2>Manage Poliklinik -> View Poliklinik</h2></header>
+	<header><h2>Manage Poliklinik -> View Jam</h2></header>
 	<content>
-		<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_poliklinik';">Tambah Data</button>
+		<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_jam';">Tambah Data</button>
 
 		<div id="result" >
 		</div>

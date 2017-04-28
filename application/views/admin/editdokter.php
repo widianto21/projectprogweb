@@ -9,13 +9,13 @@
 		}
 		var url = "";
 		if(!STR){
-			url = "<?php echo base_url();?>admin/get_data_poli";
+			url = "<?php echo base_url();?>admin/get_data_dokter";
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
 		}
 		else{
-			url = "<?php echo base_url();?>admin/get_single_poli/" + STR;
+			url = "<?php echo base_url();?>admin/get_single_dokter/" + STR;
 			xmlHttp.onreadystatechange = stateChanged;
 			xmlHttp.open("GET",url,true);
 			xmlHttp.send(null);
@@ -43,20 +43,19 @@
 	function check(){
 		document.getElementById("search").value="isi";
 	}
-	function delete_poli(ID_Poli){
-		if(confirm("Apakah yakin ingin menghapus data dengan id : " + ID_Poli + " ? ") == true){
-			return true;
-		}else{
-			return false;
-		}
-	}
 </script>
 <article class="topcontent">
 	<header><h2>Manage Poliklinik -> View Poliklinik</h2></header>
 	<content>
-		<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_poliklinik';">Tambah Data</button>
-
-		<div id="result" >
+		<?php 
+				if(isset($msg)){
+					echo "<div style=\"color:red;\">".$msg."</div>";
+				}
+			?>
+			
+			<div class="little_text">Cari Berdasarkan ID/ Nama/ Alamat/ No. Telp/ Id Poliklinik</div> <input class="search_box" type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value);" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
+			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_dokter';">Tambah Dokter</button>
+		<div id="result">
 		</div>
 	</content>
 </article>

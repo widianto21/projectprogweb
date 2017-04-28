@@ -47,7 +47,14 @@
 <article class="topcontent">
 	<header><h2>Management User - > view User</h2></header>
 	<content>
-			CARI <input type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value)" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
+			<?php 
+				if(isset($msg)){
+					echo "<div style=\"color:red;\">".$msg."</div>";
+				}
+			?>
+			<div class="little_text">CARI BERDASARKAN USER ID/ID POLI/USERNAME</div><input class="search_box" type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value)" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
+			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_dokter';">Tambah Dokter</button>
+			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_perawat';">Tambah Perawat</button>
 		<div id="result">
 		</div>
 	</content>
