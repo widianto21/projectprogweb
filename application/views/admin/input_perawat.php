@@ -1,5 +1,5 @@
 <article class="topcontent">
-	<header><h2>Management User - > Input Perawat</h2></header>
+	<header><h2>Management User - > Input Petugas</h2></header>
 	<content>
 		<div class="input_table">
 		<form method="post" id="form_input" action="<?php echo base_url();?>admin/input_data_perawat">

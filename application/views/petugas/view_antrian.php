@@ -20,14 +20,14 @@
 		foreach($daftar_berobat as $u){ 
 		?>
 		<tr>
-			<td><?php echo $u->NO_ANTRIAN ?></td>
-			<td><?php echo $u->ID_PASIEN ?></td>
-			<td><?php echo $u->ID_JADWAL ?></td>
-			<td><?php echo $u->TGL_BEROBAT ?></td>
-			<td><?php echo $u->JAM_DAFTAR ?></td>
+			<td><?php echo $u['NO_ANTRIAN'];?></td>
+			<td><?php echo $u['ID_PASIEN'];?></td>
+			<td><?php echo $u['ID_JADWAL']?></td>
+			<td><?php echo $u['TGL_BEROBAT'];?></td>
+			<td><?php echo $u['JAM_DAFTAR'];?></td>
 			
 			<td>
-                  <?php echo anchor('petugas/hapus_antrian/'.$u->NO_ANTRIAN,'Masuk'); ?>
+                  <?php echo anchor('petugas/hapus_antrian/'.$u['NO_PENDAFTARAN'],'Hapus dari antrian'); ?>
 			</td>
 		</tr>
 		<?php } ?>

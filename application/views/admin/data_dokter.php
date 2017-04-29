@@ -7,7 +7,6 @@
 					echo $msg;
 				}
 			?>
-	<form method="post" id="form_input" action="<?php echo base_url();?>admin/input_data_dokter/1">
 		<table>
 			<?php if(isset($data_dokter)){?>
 				<tr>
@@ -22,27 +21,35 @@
 						</table>
 					</td>
 				</tr>
-				<table>
+				<table class="jadwal">
 				<h4>JADWAL PRAKTEK</h4>
-				<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_jadwal/<?php echo $data_dokter[0]['ID_DOKTER']?>">Tambah Jadwal</button>
+				<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_jadwal/<?php echo $data_dokter[0]['ID_DOKTER']?>';">Tambah Jadwal</button>
+				<tr>
+					<th>Id Jadwal</th>
+					<th>Awal Praktek</th>
+					<th>Akhir Praktek</th>
+					<th>Hari</th>
+					<th>Ruangan</th>
+					<th>ACTION</th>
+				</tr>
 					<?php 
 						if(isset($data_jadwal)){
 							if($data_jadwal != "kosong"){
 								foreach ($data_jadwal as $row) {
-									echO "<tr><td>".$row['ID_JADWAL']."</td></tr>";
-									echO "<tr><td>".$row['JAM_AWAL']."</td></tr>";
-									echO "<tr><td>".$row['JAM_AKHIR']."</td></tr>";
-									echO "<tr><td>".$row['HARI']."</td></tr>";
-									echO "<tr><td>".$row['RUANGAN']."</td></tr>";
+									echO "<tr><td>".$row['ID_JADWAL']."</td>
+									<td>".$row['JAM_AWAL']."</td>
+									<td>".$row['JAM_AKHIR']."</td>
+									<td>".$row['HARI']."</td>
+									<td>".$row['RUANGAN']."</td>
+									<td><div class=\"action\"><a href=\"". base_url()."admin/show_update_jadwal/".$row['ID_JADWAL']."\">Edit</a> | <a href=\"". base_url()."admin/delete_jadwal/".$row['ID_JADWAL']."/".$data_dokter[0]['ID_DOKTER']."\">Delete</a></div></td></tr>";
 								}
 							}else{
-								echo "kosong";
+								echo "<tr><td colspan=\"6\"> kosong</td><tr>";
 							}
 						}
 					?>
 				</table>
 			<?php }?>
 		</table>
-	</form>
 	</content>
 </article>

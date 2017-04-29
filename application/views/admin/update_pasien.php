@@ -3,7 +3,7 @@
 	<content>
 		<div class="input_table">
 			<?php foreach($pasien as $u){ ?>
-			<form action="<?php echo base_url(). 'petugas/update'; ?>" method="post">	
+			<form action="<?php echo base_url(). 'admin/update_pasien'; ?>" method="post">	
 				<table>
 				<tr>
 					<td class="title"><label>ID Pasien</label></td>

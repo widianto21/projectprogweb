@@ -6,15 +6,11 @@
 				<table>
 				<tr>
 					<td class="title"><label>ID Pasien</label></td>
-					<td><input type="text" name="txtidpasien"/></td>
+					<td><input type="text" name="txtidpasien" value="<?php echo $ID_PASIEN;?>"/></td>
 				</tr>
 				<tr>
 					<td class="title"><label>Nama Pasien</label></td>
 					<td><input type="text" name="txtnamapasien"/></td>
-				</tr>
-				<tr>
-					<td class="title"><label>Nama Ibu Kandung</label></td>
-					<td><input type="text" name="txtnamaibu"/></td>
 				</tr>
 				<tr>
 					<td class="title"><label>Jenis Kelamin</label></td>
@@ -32,13 +28,6 @@
 					<td><input type="date" name="tanggallahir"/></td>
 				</tr>
 
-				<tr>
-					<td class="title"><label>Kewarganegaraan</label></td>
-					<td>
-						<input type="radio" name="kwn" value="Indonesia">Indonesia</input>
-						<input type="radio" name="kwn" value="Asing">Asing</input>
-					</td>
-				</tr>
 				<tr>
 					<td class="title"><label>Agama</label></td>
 					<td><select name="agama">
