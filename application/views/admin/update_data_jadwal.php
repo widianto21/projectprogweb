@@ -2,6 +2,7 @@
 	<header><h2>Manage Poliklinik -> Input Poliklinik</h2></header>
 	<content>
 		<div class="input_table">
+		<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_jadwal_dokter/<?php echo $data_dokter[0]['ID_DOKTER']?>';">Kembali Ke Dokter</button>
 			<form method="post" action="<?php echo base_url()?>admin/update_data_jadwal">
 			<table>
 				<?php
@@ -17,7 +18,7 @@
 						}
 				?>
 				<tr>
-					<th colspan="2">Jenis User</th>
+					<th colspan="2">Data Jadwal</th>
 				</tr>
 				<tr>
 					<td class="title"><label>ID JADWAL</label></td>

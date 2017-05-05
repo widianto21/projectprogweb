@@ -45,14 +45,14 @@
 	}
 </script>
 <article class="topcontent">
-	<header><h2>Antrian Pasien</h2></header>
+	<header><h2>Data Pasien</h2></header>
 	<content>
 		<?php 
 				if(isset($msg)){
 					echo "<div style=\"color:red;\">".$msg."</div>";
 				}
 			?>
-			
+			<div class="little_text">Cari Berdasarkan ID/ Nama/ Alamat/ No. Telp / TGL. Lahir</div> <input class="search_box" type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value);" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
 			<div class="little_text">List Pasien</div>
 		<div id="result">
 		</div>

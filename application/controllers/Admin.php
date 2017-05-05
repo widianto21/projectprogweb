@@ -45,20 +45,58 @@
 					)
 				);
 				if($mod != 0){
-					$dokter = $this->admin_model->update_dokter($data['data_dokter']);
-					$user = $this->admin_model->update_user($data['data_user']);
+					$cond1 = array(
+						array('col' => 'ID_DOKTER', 'data' => $data['data_dokter']['ID_DOKTER'])
+						);
+					$cond2 = array(
+						array('col' => 'ID_USER', 'data' => $data['data_user']['ID_USER'])
+						);
+					$dokter = $this->admin_model->update($data['data_dokter'],'dokter',$cond1);
+					$user = $this->admin_model->update($data['data_user'],'users',$cond2);
 					if($dokter == TRUE || $user == TRUE){
 						$this->show_input_dokter("Data Berhasil Dirubah");
 					}
 				}else{
-					$dokter = $this->admin_model->insert_dokter($data['data_dokter']);
-					$user = $this->admin_model->insert_user($data['data_user']);
+					$dokter = $this->admin_model->insert($data['data_dokter'],'dokter');
+					$user = $this->admin_model->insert($data['data_user'],'users');
 					if($dokter == TRUE || $user == TRUE){
-						$this->show_input_dokter("Data Berhasil Dirubah");
+						$this->show_input_dokter("Data Berhasil Ditambahkan");
 					}	
 				}
 				
 			}
+		}
+
+		function input_data_pasien(){
+			$id_pasien = $this->input->post('txtidpasien');
+			$nama_pasien = $this->input->post('txtnamapasien');
+			$jenis_kelamin = $this->input->post('jk');
+			$tempat_lahir = $this->input->post('tempatlahir');
+			$tgl_lahir = $this->input->post('tanggallahir');
+			$agama = $this->input->post('agama');
+			$alamat_pasien = $this->input->post('alamat');
+			$no_telp = $this->input->post('txtnotelp');
+	 
+			$data = array(
+				'id_pasien' => $id_pasien,
+				'nama_pasien' => $nama_pasien,
+				'jenis_kelamin' => $jenis_kelamin,
+				'tempat_lahir' => $tempat_lahir,
+				'tgl_lahir' => $tgl_lahir,
+				'agama' => $agama,
+				'alamat_pasien' => $alamat_pasien,
+				'no_telp' => $no_telp,
+				);
+			$user = array(
+				'ID_USER' => $this->input->post('txtIDUser'),
+				'USERNAME' => $this->input->post('txtUsername'),
+				'PASSWORD' => $this->input->post('txtPassword'),
+				'TIPE' => $this->input->post('txtTipe'),
+				'ID_POLIKLINIK' => $this->input->post('txtId')
+				);
+
+			$this->petugas_model->input_data($data,'pasien');
+			$user = $this->admin_model->insert($user,'users');
 		}
 
 		function input_data_perawat(){
@@ -88,8 +126,8 @@
 						'ID_POLIKLINIK' => $this->input->post('txtId')
 					)
 				);
-				$perawat = $this->admin_model->insert_perawat($data['data_perawat']);
-				$user = $this->admin_model->insert_user($data['data_user']);
+				$perawat = $this->admin_model->insert($data['data_perawat'],'perawat');
+				$user = $this->admin_model->insert($data['data_user'],'users');
 				if($perawat == TRUE && $user == TRUE){
 					$this->show_input_perawat("Data Ditambahkan");
 				}
@@ -114,7 +152,7 @@
 						'JAM_AWAL' => $this->input->post('txtJamAwal'),
 						'JAM_AKHIR' => $this->input->post('txtJamAkhir')
 				);
-				$jadwal = $this->admin_model->insert_jadwal($data);
+				$jadwal = $this->admin_model->insert($data, 'jadwal');
 				if($jadwal == TRUE){
 					$this->show_input_jadwal($this->input->post('txtIdDokter'),'Data Jadwal Berhasil Ditambahkan');
 				}
@@ -140,7 +178,10 @@
 						'JAM_AWAL' => $this->input->post('txtJamAwal'),
 						'JAM_AKHIR' => $this->input->post('txtJamAkhir')
 				);
-				$jadwal = $this->admin_model->update_jadwal($data);
+				$cond = array(
+					array('col' => 'ID_JADWAL', 'data' => $data['ID_JADWAL'])
+					);
+				$jadwal = $this->admin_model->update($data, 'jadwal', $cond);
 				if($jadwal == TRUE){
 					$this->show_update_jadwal($this->input->post('txtIdJadwal'),'Data Jadwal Update Ditambahkan');
 				}
@@ -192,7 +233,7 @@
 				'ID_POLI' => $this->input->post('txtIdPoli'),
 				'NAMA_POLI' => $this->input->post('txtNamaPoli')
 			);
-			$res = $this->admin_model->insert_poli($data);
+			$res = $this->admin_model->insert($data,'poliklinik');
 			$this->show_input_poliklinik($res);
 		}
 
@@ -249,22 +290,36 @@
 					'tgl_lahir' => $tgl_lahir,
 					'agama' => $agama,
 					'alamat_pasien' => $alamat_pasien,
-					'no_telp' => $no_telp,
+					'no_telp' => $no_telp
+					);
+				$data_user = array(
+						'ID_USER' => $this->input->post('txtIDUser'),
+						'USERNAME' => $this->input->post('txtUsername'),
+						'PASSWORD' => $this->input->post('txtPassword'),
+						'TIPE' => $this->input->post('txtTipe'),
+						'ID_POLIKLINIK' => $data['id_pasien']
 					);
 
 				$where = array(
 					'ID_PASIEN' => $id_pasien
 				);
+				foreach ($data_user as $row) {
+					echo $row;
+				}
+
+				$cond = array(array('col' => 'ID_USER', 'data' => $data_user['ID_USER']));
 	 
 			$this->petugas_model->update_data($where,$data,'pasien');
-			redirect('admin/show_view_pasien');
+			$this->admin_model->update($data_user,'users',$cond);
+			redirect('admin/show_view_user');
 		}		
 		// end update data
 
 		// function delete
 
 		function delete_data_poliklinik($ID_POLI){
-			$res = $this->admin_model->delete_poli($ID_POLI);
+			$cond = array('ID_POLI'=> $ID_POLI);
+			$res = $this->admin_model->delete('poliklinik', $cond);
 			$this->show_view_poliklinik();
 		}
 
@@ -278,10 +333,14 @@
 			if($ID_DOKTER == ""){
 				$this->show_view_user();	
 			}else{
-				$res1 = $this->admin_model->delete_dokter($ID_DOKTER);
-				$res2 = $this->admin_model->delete_user($ID_DOKTER);
+				$cond = array('ID_DOKTER' => $ID_DOKTER);
+				$cond2 = array('ID_POLIKLINIK' => $ID_DOKTER);
+				$res1 = $this->admin_model->delete('dokter', $cond);
+				$res2 = $this->admin_model->delete('users', $cond2);
 				if($res1 == TRUE && $res2 == TRUE){
-					$this->show_view_user("Data Berhasil Dihapus");	
+					$this->show_view_dokter("Data Berhasil Dihapus");	
+				}else{
+					$this->show_view_dokter();	
 				}
 			}
 		}
@@ -297,6 +356,7 @@
 				}	
 				else if($res1 == FALSE){
 					echo $res1;
+					$this->show_view_user();
 				}
 			}
 		}
@@ -305,12 +365,14 @@
 			if($ID_DOKTER == "" || $ID_JADWAL == ""){
 				$this->show_jadwal_dokter($ID_DOKTER);	
 			}else{
-				$res1 = $this->admin_model->delete_jadwal($ID_JADWAL);
+				$cond = array('ID_JADWAL' => $ID_JADWAL);
+				$res1 = $this->admin_model->delete('jadwal', $cond);
 				if($res1 == TRUE){
 					$this->show_jadwal_dokter($ID_DOKTER,"Data Berhasil Dihapus");	
 				}	
 				else if($res1 == FALSE){
 					echo $res1;
+					$this->show_jadwal_dokter($ID_DOKTER);	
 				}
 			}
 		}
@@ -320,7 +382,10 @@
 		//function get_data
 
 		function get_data_dokter(){
-			$list = $this->admin_model->get_list_dokter();
+			$condition = array(
+				array('table' => 'poliklinik AS P', 'join' => 'P.ID_POLI = D.ID_POLI')
+				);
+			$list = $this->admin_model->get_list('dokter AS D',$condition);
 			echo "<table>
 					<tr>
 						<th>ID DOKTER</td>
@@ -344,7 +409,10 @@
 		}
 
 		function get_single_dokter($data){
-			$list = $this->admin_model->get_specific_dokter($data);
+			$cond = array(
+				'where' => array('col' => 'ID_DOKTER', 'data' =>$data)
+				);
+			$list = $this->admin_model->get_specific('dokter', $cond);
 			echo "<table>
 					<tr>
 						<th>ID DOKTER</td>
@@ -370,7 +438,7 @@
 		}
 
 		function get_data_user(){
-			$list = $this->admin_model->get_list_user();
+			$list = $this->admin_model->get_list('users');
 			echo "<table>
 					<tr>
 						<th>ID USER</td>
@@ -388,7 +456,7 @@
 				if($row['TIPE'] == "admin"){
 					echo "<td>Tidak Tersedia</td>";
 				}else{
-					echo "<td><a href=\"".base_url()."admin/show_detail_pasien/".$row['TIPE']."/".$row['ID_POLIKLINIK']."\">EDIT</a> | <a href=\"".base_url()."admin/delete_data_".$row['TIPE']."/".$row['ID_POLIKLINIK']."\" onclick=\"return confirm('Are you sure?')\">DELETE</a></td>";
+					echo "<td><a href=\"".base_url()."admin/show_update_".$row['TIPE']."/".$row['ID_POLIKLINIK']."\">EDIT</a> | <a href=\"".base_url()."admin/delete_data_".$row['TIPE']."/".$row['ID_POLIKLINIK']."\" onclick=\"return confirm('Are you sure?')\">DELETE</a></td>";
 				}
 				echo "</tr>";
 			}
@@ -396,7 +464,7 @@
 		}
 
 		function get_data_pasien(){
-			$list = $this->admin_model->get_list_pasien();
+			$list = $this->admin_model->get_list('pasien');
 			echo "<table>
 					<tr>
 						<th>ID PASIEN</td>
@@ -425,7 +493,16 @@
 		}
 
 		function get_single_pasien($data){
-			$list = $this->admin_model->get_specific_pasien($data);
+			$cond = array(
+				'like' => array('col' => 'ID_PASIEN', 'data' => $data),
+				'or_like' => array(
+								array('col' => 'NAMA_PASIEN', 'data' => $data),
+								array('col' => 'TGL_LAHIR', 'data' => $data),
+								array('col' => 'NO_TELP', 'data' => $data)
+							 )
+			);	
+			$list = $this->admin_model->get_specific('pasien',$cond);
+			echo $this->db->last_query();
 			echo "<table>
 					<tr>
 						<th>ID PASIEN</td>
@@ -484,7 +561,7 @@
 		}
 
 		function get_data_poli(){
-			$list = $this->admin_model->get_list_poli();
+			$list = $this->admin_model->get_list('poliklinik');
 			if($list != "kosong"){
 				echo "<table>
 						<tr>
@@ -564,11 +641,26 @@
 			$this->load->view('template/footer');
 		}
 
+		function show_input_pasien($msg = ""){
+			$this->load->view('template/header');
+			$this->load->view('admin/nav_admin');
+			$data['ID_PASIEN'] = $this->petugas_model->generate_kode_pasien();
+			if($msg != ""){
+				$data['msg'] = $msg;
+			}	
+			$data['id_user'] = $this->admin_model->generate_id_user();
+			$data['tipe'] = "pasien";
+			$this->load->view('admin/input_pasien',$data);
+			$this->load->view('admin/input_data_user',$data);
+			echo "</form>";
+			$this->load->view('template/footer');
+		}
+
 		function show_input_dokter($msg = ""){
 			$this->load->view('template/header');
 			$this->load->view('admin/nav_admin');
 			$data['id_dokter'] = $this->admin_model->generate_id_dokter();
-			$data['poli'] = $this->admin_model->get_list_poli();
+			$data['poli'] = $this->admin_model->get_list('poliklinik');
 			if($msg != ""){
 				$data['msg'] = $msg;
 			}
@@ -581,7 +673,10 @@
 
 		function show_input_jadwal($kode_dokter = "", $msg = ""){
 			$data['kode'] = $this->admin_model->generate_id_jadwal();
-			$data['data_dokter'] = $this->admin_model->get_single_dokter($kode_dokter);
+			$cond = array(
+				'where' => array('col' => 'ID_DOKTER', 'data' => $kode_dokter)
+				);
+			$data['data_dokter'] = $this->admin_model->get_specific('dokter', $cond);
 			if($kode_dokter == ""){
 				echo "Data Dokter TIdak Boleh Kosong";
 			}
@@ -643,10 +738,15 @@
 			$this->load->view('template/footer');
 		}
 
-		function show_view_dokter(){
+		function show_view_dokter($msg = ""){
 			$this->load->view('template/header');
 			$this->load->view('admin/nav_admin');
-			$this->load->view('admin/editdokter');
+			if($msg != ""){
+				$data['msg'] = $msg;
+				$this->load->view('admin/editdokter', $data);	
+			}else{
+				$this->load->view('admin/editdokter');	
+			}
 			$this->load->view('template/footer');
 		}
 
@@ -658,7 +758,10 @@
 		}
 
 		function show_update_poliklinik($kode, $res= FALSE){
-			$data['result'] = $this->admin_model->get_specific_poli($kode);
+			$cond = array(
+				'where' => array('col' => 'ID_POLI', 'data' => $kode)
+				);
+			$data['result'] = $this->admin_model->get_specific('poliklinik',$cond);
 			if($res == TRUE){
 				$data['res'] = $res;
 			}
@@ -669,10 +772,12 @@
 		}
 
 		function show_update_dokter($kode, $res= FALSE){
-			// $data_user= $this->admin_model->get_specific_user($kode);
-			$data_dokter = $this->admin_model->get_specific_dokter($kode);
-			$data_poliklinik = $this->admin_model->get_list_poli();
-			//$data['data_user'] = $data_user;
+			$cond = array(
+				'join' => array('col' => 'users as S', 'data' => 'S.ID_POLIKLINIK = D.ID_DOKTER'),
+				'where' => array('col' => 'ID_DOKTER', 'data' => $kode)
+				);
+			$data_dokter = $this->admin_model->get_specific('dokter AS D',$cond);
+			$data_poliklinik = $this->admin_model->get_list('poliklinik');
 			$data['data_dokter'] = $data_dokter;
 			$data['data_poliklinik'] = $data_poliklinik;
 			if($res == TRUE){
@@ -683,10 +788,13 @@
 			$this->load->view('admin/update_data_dokter', $data);
 			$this->load->view('template/footer');
 		}
-		function show_update_perawat($kode, $res= FALSE){
-			$data_user= $this->admin_model->get_specific_user($kode);
-			$data_perawat = $this->admin_model->get_specific_perawat($data_user[0]['ID_POLIKLINIK']);
-			echo $data_user[0]['ID_POLIKLINIK'];
+		function show_update_petugas($kode, $res= FALSE){
+			$cond = array(
+				'join' => array('col' => 'users as S', 'data' => 'S.ID_POLIKLINIK = P.ID_PERAWAT'),
+				'where' => array('col' => 'ID_PERAWAT', 'data' => $kode)
+				);
+			$data_user= $this->admin_model->get_specific('perawat AS P', $cond);
+			$data_perawat = $data_user;
 			$data['data_user'] = $data_user;
 			$data['data_perawat'] = $data_perawat;
 			if($res == TRUE){
@@ -704,8 +812,15 @@
 			if($kode == ""){
 				$this->load->view('admin/data_dokter', $data['msg'] = "kosong");
 			}else{
-				$data_dokter = $this->admin_model->get_specific_dokter($kode);
-				$data_jadwal = $this->admin_model->get_list_jadwal($kode);
+				$cond1= array(
+					'like' => array('col' => 'ID_DOKTER', 'data' => $kode),
+					'join' => array('col' => 'poliklinik AS P', 'data' => 'P.ID_POLI=D.ID_POLI')
+				);
+				$data_dokter = $this->admin_model->get_specific('dokter AS D', $cond1);
+				$cond2= array(
+					'where' => array('col' => 'ID_DOKTER', 'data' => $kode)
+				);
+				$data_jadwal = $this->admin_model->get_specific('jadwal', $cond2);
 				$data['data_dokter'] = $data_dokter;
 				$data['data_jadwal'] = $data_jadwal;
 				$this->load->view('admin/data_dokter', $data);
@@ -713,7 +828,11 @@
 			$this->load->view('template/footer');
 		}
 		function show_update_jadwal($kode, $msg = ""){
-			$data['data_dokter'] = $this->admin_model->get_specific_jadwal($kode);
+			$cond = array(
+				'join' => array('col' => 'dokter as D', 'data' => 'D.ID_DOKTER = J.ID_DOKTER'),
+				'where' => array('col' => 'ID_JADWAL', 'data' => $kode)
+				);
+			$data['data_dokter'] = $this->admin_model->get_specific('jadwal AS J',$cond);
 			if($msg != ""){
 				$data['msg'] = $msg;
 			}
@@ -724,8 +843,11 @@
 		}
 
 		function show_update_pasien($id_pasien){
-			$where = array('ID_PASIEN' => $id_pasien);
-			$data['pasien'] = $this->petugas_model->edit_data($where,'pasien')->result();	
+			$data['pasien'] = $this->petugas_model->edit_data('ID_PASIEN=\''.$id_pasien.'\'','pasien')->result();
+			$cond = array(
+				'where' => array('col' => 'ID_POLIKLINIK','data' => $id_pasien)
+			);
+			$data['user'] = $this->admin_model->get_specific('users', $cond);
 			$this->load->view('template/header');
 			$this->load->view('admin/nav_admin');
 			$this->load->view('admin/update_pasien',$data);

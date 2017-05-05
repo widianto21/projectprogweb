@@ -19,8 +19,6 @@
 						<input type="radio" name="jk" value="Laki-laki" <?php echo ($u->JENIS_KELAMIN=='Laki-laki')?'checked':''?> >Laki-laki</input>
 						<input type="radio" name="jk" value="Perempuan" <?php echo ($u->JENIS_KELAMIN=='Perempuan')?'checked':''?> >Perempuan</input>
 					</td>
-
-					
 				</tr>
 				<tr>
 					<td class="title"><label>Tempat Lahir</label></td>
@@ -51,9 +49,30 @@
 					<td class="title"><label>No Telepon</label></td>
 					<td><input type="number" name="txtnotelp" value = "<?php echo $u->NO_TELP ?>"></input> </td>
 				</tr>
+				
+					<tr>
+					<th colspan="2">Data Account</th>
+				</tr>
+				<tr>
+					<td class="title"><label>ID User</label></td>
+					<td><input type="text" name="txtIDUser" readonly="readonly" value="<?php echo $user[0]['ID_USER'];?>"/><?php echo form_error('txtIDUser');?></td>
+				</tr>
+				<tr>
+					<td class="title"><label>Username</label></td>
+					<td><input type="text" name="txtUsername" value="<?php echo $user[0]['USERNAME'];?>"/><?php echo form_error('txtUsername');?></td>
+				</tr>
+				<tr>
+					<td class="title"><label>Password</label></td>
+					<td><input type="password" name="txtPassword" value="<?php echo $user[0]['PASSWORD'];?>"/><?php echo form_error('txtPassword');?></td>
+				</tr>
+				<tr>
+					<td class="title"><label>Tipe</label></td>
+					<td><input type="text" name="txtTipe" readonly="readonly" value="<?php echo $user[0]['TIPE'];?>"/></td>
+				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" name="submit" value="Ubah Data"/></td>
 				</tr>
+			
 			</table>
 		</form>
 		<?php } ?>

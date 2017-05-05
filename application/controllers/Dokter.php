@@ -106,6 +106,38 @@
 			}
 		}
 
+		function get_specific_pasien($kode){
+			$list = $this->dokter_model->get_specific_pasien($kode);
+			if($list != "kosong"){
+				echo "<table>
+						<tr>
+							<th>ID PASIEN</th>
+							<th>NAMA</th>
+							<th>JENIS KELAMIN</th>
+							<th>TTL</th>
+							<th>AGAMA</th>
+							<th>ALAMAT</th>
+							<th>NO. TELP</th>
+							<th>ACTION</th>
+						</tr>";
+				foreach ($list as $row) {
+					echo "<tr>
+							<td>".$row['ID_PASIEN']."</td>
+							<td>".$row['NAMA_PASIEN']."</td>
+							<td>".$row['JENIS_KELAMIN']."</td>
+							<td>".$row['TEMPAT_LAHIR']."|".date('d-m-Y',strtotime($row['TGL_LAHIR']))."</td>
+							<td>".$row['AGAMA']."</td>
+							<td>".$row['ALAMAT_PASIEN']."</td>
+							<td>".$row['NO_TELP']."</td>
+							<td><a href=\"".base_url()."dokter/show_detail_pasien/".$row['ID_PASIEN']."\">Riwayat</a> | <a href=\"".base_url()."dokter/show_update_pasien/".$row['ID_PASIEN']."\">Edit</a></td>
+						</tr>";
+				}
+				echo "</table>";
+			}else{
+				echo "Tidak Ada Pasien";
+			}
+		}
+
 		function get_list_antrian(){
 			$list = $this->dokter_model->get_data_antrian($this->session->userdata['logged_in']['id_poli']);
 			if($list != "kosong"){
@@ -115,15 +147,15 @@
 							<th>NAMA PASIEN</td>
 							<th>TGL. BEROBAT</td>
 							<th>JAM DAFTAR</td>
+							<th>ACTION</td>
 						</tr>";
-						// <th>ACTION</td>
 				foreach($list as $row){
 					echo "<tr>
 							<td>".$row['NO_ANTRIAN']."</td>
 							<td>".$row['NAMA_PASIEN']."</td>
 							<td>".$row['TGL_BEROBAT']."</td>
 							<td>".$row['JAM_DAFTAR']."</td>";
-						// echo "<td><a href=\"".base_url()."admin/show_update_dokter/".$row['NO_PENDAFTARAN']."\">EDIT</a>|<a href=\"".base_url()."admin/delete_data_dokter/".$row['NO_PENDAFTARAN']."\" onclick=\"return confirm('Are you sure?')\">DELETE</a></td>";
+						echo "<td><a href=\"".base_url()."admin/show_update_dokter/".$row['NO_PENDAFTARAN']."\">EDIT</a>|<a href=\"".base_url()."dokter/delete_antrian/".$row['NO_PENDAFTARAN']."\" onclick=\"return confirm('Are you sure?')\">DELETE</a></td>";
 					echo "</tr>";
 				}
 					echo "</table>";
@@ -243,6 +275,11 @@
 				$this->show_list_antrian();
 				echo "<script>alert('tidak ada pasien yang perlu ditangani')</script>";
 			}
+		}
+
+		function delete_antrian($no_pendaftaran){
+			$this->dokter_model->delete_antrian($no_pendaftaran);
+			$this->show_list_antrian();
 		}
 
 		//function logout

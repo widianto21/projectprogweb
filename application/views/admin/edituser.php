@@ -55,6 +55,7 @@
 			<div class="little_text">CARI BERDASARKAN USER ID/ID POLI/USERNAME</div><input class="search_box" type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value)" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
 			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_dokter';">Tambah Dokter</button>
 			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_perawat';">Tambah Perawat</button>
+			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_pasien';">Tambah Pasien</button>
 		<div id="result">
 		</div>
 	</content>

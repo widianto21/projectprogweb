@@ -53,7 +53,8 @@
 				}
 			?>
 			
-			<div class="little_text">Cari Berdasarkan ID Pasien/ Nama/ Alamat/ No. Telp</div> <input class="search_box" type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value);" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
+			<div class="little_text">Cari Berdasarkan ID Pasien / Nama / Tgl. Lahir / No. Telp</div> <input class="search_box" type="text" id="search" name="search" onkeydown="get_list(document.getElementById('search').value);" /><button class="search" onClick="get_list(document.getElementById('search').value)">Cari</button>
+			<button class="button" onclick="location.href='<?php echo base_url();?>admin/show_input_pasien';">Tambah Pasien</button>
 		<div id="result">
 		</div>
 	</content>

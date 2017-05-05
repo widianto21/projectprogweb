@@ -125,13 +125,15 @@ class petugas_model extends CI_Model{
 			}
         }
 
-        function generate_no_antrian(){
-           $this->db->select('*');
+        function generate_no_antrian($id_jadwal){
+           	$this->db->select('*');
 			$this->db->from('daftar_berobat');
 			$this->db->where('TGL_BEROBAT', date('Y-m-d'));
+			$this->db->where('ID_JADWAL', $id_jadwal);
+			$this->db->where('STATUS', 'Menunggu');
 			$list = $this->db->get();
 			if($list->num_rows() == 0){
-				return "01";
+				return "1";
 			}
 			else{
 				$data = $list->result();
@@ -143,7 +145,19 @@ class petugas_model extends CI_Model{
 
         function get_list_dokter(){
         	$this->db->select('*');
-        	$this->db->from('dokter');
+        	$this->db->from('dokter AS D');
+        	$this->db->join('poliklinik AS P', 'P.ID_POLI=D.ID_POLI');
+        	$list = $this->db->get();
+			if($list->num_rows() > 0){
+				return $list->result_array();
+			}else{
+				return "kosong";
+			}
+        }
+
+        function get_list_poliklinik(){
+        	$this->db->select('*');
+        	$this->db->from('poliklinik');
         	$list = $this->db->get();
 			if($list->num_rows() > 0){
 				return $list->result_array();
@@ -178,6 +192,21 @@ class petugas_model extends CI_Model{
 			}else{
 				return "kosong";
 			}	
+		}
+		function check_jadwal($id_dokter = "", $hari = ""){
+			if($id_dokter !=""){
+				$this->db->select('*');
+				$this->db->from('jadwal');
+				$this->db->where('ID_DOKTER', $id_dokter);
+				$this->db->where('HARI', $hari);
+				$list = $this->db->get();
+				if($list->num_rows() > 0){
+					return $list->result_array();
+				}else{
+					return "kosong";
+				}
+			}
+			
 		}
 	}
 ?>

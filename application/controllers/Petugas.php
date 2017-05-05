@@ -25,12 +25,30 @@
 
 		function view_jadwal($ID_DOKTER){
 			$list = $this->petugas_model->list_jadwal($ID_DOKTER);
-			echo "<select name=\"idjadwal\">";
+			echo "<select name=\"idjadwal\" onchange=\"get_jadwal(this.value)\">";
 			foreach ($list as $row) {
 				echo "<option value=\"".$row['ID_JADWAL']."\">".$row['HARI']." | ".date("H:i",strtotime($row['JAM_AWAL']))."-".date("H:i",strtotime($row['JAM_AKHIR']))."</option>";
 			}
 			echo "</select>";
 		}
+
+		function show_list_dokter(){
+			$list = $this->petugas_model->get_list_dokter();
+			if($list != "kosong")
+			echo "<td>DOKTER</td>
+				<td>
+					<select name=\"txtIdDokter\" onChange=\"get_jadwal(this.value);\">";
+					echo "<option value=\"\">Pilih Dokter</option>";
+						if($list != "kosong"){
+							foreach ($list as $row) {
+								echo "<option value=\"".$row['ID_DOKTER']."\">".$row['NAMA']."</option>";
+							}	
+						}						
+					echo "</select>
+				</td>
+			</tr>";
+		}
+
 		function tambah_aksi(){
 
 			$id_pasien = $this->input->post('txtidpasien');
@@ -57,15 +75,15 @@
 			redirect('petugas/index');
 	}
 
+
+
 		function tambah_daftar_berobat(){
 			//$view['daftar_berobat'] = $this->petugas_model->antrian()->result();
 			$kode_pendaftaran = $this->petugas_model->generate_kode_pendaftaran();
 			$list_dokter = $this->petugas_model->get_list_dokter();
-			$no_antrian = $this->petugas_model->generate_no_antrian();
 			$data = array(
 				'kode_pendaftaran' => $kode_pendaftaran,
 				'list_dokter' => $list_dokter,
-				'no_antrian' => $no_antrian
 			);
 			$this->load->view('template/header');
 			$this->load->view('petugas/nav_petugas');
@@ -102,7 +120,7 @@
 			$nopendaftaran = $this->input->post('nopendaftaran');
 			$idpasien = $this->input->post('idpasien');
 			$idjadwal = $this->input->post('idjadwal');
-			$tglberobat = date("d/m/Y",strtotime($this->input->post('tglberobat')));
+			$tglberobat = date("Y/m/d",strtotime($this->input->post('tglberobat')));
 			$jamdaftar = $this->input->post('jamdaftar');
 			$noantrian = $this->input->post('noantrian');
 			
@@ -124,6 +142,9 @@
 
 		function lihat_antrian(){
 				$data['daftar_berobat'] = $this->petugas_model->tampil_data_daftar_berobat();
+				if($data['daftar_berobat'] == null){
+					$data['daftar_berobat'] = "kosong";
+				}
 				$this->load->view('template/header');
 				$this->load->view('petugas/nav_petugas');
 				$this->load->view('petugas/view_antrian',$data);
@@ -134,6 +155,34 @@
 			$where = array('ID_PASIEN' => $id_pasien);
 			$this->petugas_model->hapus_data($where,'pasien');
 			redirect('petugas/index');
+		}
+
+		function check_jadwal($id_dokter){
+			$date =date("Y-m-d");
+			$date = date("D", strtotime($date));
+			$hari = array(
+				'Mon' => 'Senin',
+				'Tue' => 'Selasa',
+				'Wed' => 'Rabu',
+				'Thu' => 'Kamis',
+				'Fri' => 'Jumat',
+				'Sat' => 'Sabtu',
+				'Sun' => 'Minggu'
+				);
+			$result = "";
+			foreach($hari as $key => $row){
+				if($key == $date){
+					$result = $row;
+				}
+			}
+			$available = $this->petugas_model->check_jadwal($id_dokter, $result);		
+			if($available != "kosong"){
+				echo "<input class=\"short\" id=\"txtIdJadwal\" type=\"text\" name=\"idjadwal\" value=\"".$available[0]['ID_JADWAL']."\" readonly/>";
+				echo ", Jam Praktek <input class=\"input-2\" type=\"text\" value=\"".$available[0]['JAM_AWAL']."|".$available[0]['JAM_AKHIR']."\" readonly/>";
+			}else{
+				echo "kosong";
+			}
+			
 		}
 
 		function hapus_antrian($no_antrian){
@@ -226,8 +275,26 @@
 				echo "kosong";
 			}
 		}
-		function check_kode(){
-			$kd = $this->petugas_model->generate_kode_pendaftaran();
+		function get_no_antrian($id_jadwal){
+						$date =date("Y-m-d");
+			$date = date("D", strtotime($date));
+			$hari = array(
+				'Mon' => 'Senin',
+				'Tue' => 'Selasa',
+				'Wed' => 'Rabu',
+				'Thu' => 'Kamis',
+				'Fri' => 'Jumat',
+				'Sat' => 'Sabtu',
+				'Sun' => 'Minggu'
+				);
+			$result = "";
+			foreach($hari as $key => $row){
+				if($key == $date){
+					$result = $row;
+				}
+			}
+
+			$kd = $this->petugas_model->generate_no_antrian($id_jadwal,$result);
 			echo $kd;
 		}
 	}

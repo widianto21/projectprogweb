@@ -6,6 +6,7 @@
 			    <a href="<?php echo base_url();?>admin/show_view_user">Data User</a>
 			    <a href="<?php echo base_url();?>admin/show_input_dokter">Input Dokter</a>
 			    <a href="<?php echo base_url();?>admin/show_input_perawat">Input Petugas</a>
+			    <a href="<?php echo base_url();?>admin/show_input_pasien">Input Pasien</a>
 	  		</div>
 		</div>
 		<div class="dropdown">

@@ -64,10 +64,15 @@
 			}
 		}
 		
-		function get_specific_pasien($data){
+		function get_specific_pasien($id_pasien){
 			$this->db->select('*');
-			$this->db->from('pasien');
-			$this->db->like('ID_PASIEN', $data);
+			$this->db->from('pasien AS P');
+			$this->db->like('P.ID_PASIEN', $id_pasien);
+			$this->db->or_like('P.NAMA_PASIEN', $id_pasien);
+			$this->db->or_like('P.TGL_LAHIR', $id_pasien);
+			$this->db->or_like('P.ALAMAT_PASIEN', $id_pasien);
+			$this->db->or_like('P.NO_TELP', $id_pasien);
+			echo $this->db->last_query();
 			$list = $this->db->get();
 			if($list->num_rows() > 0){
 				return $list->result_array();
@@ -129,6 +134,7 @@
 						if(strlen((string)$kode)==3){
 							break;
 						}
+						$kode = "0".$kode;
 					}
 				// }
 				$kode = "RKM".$kode;
@@ -145,6 +151,11 @@
 			$data['STATUS'] = "Selesai";
 			$this->db->where('NO_PENDAFTARAN',$no_pendataran);
 			$this->db->update('daftar_berobat', $data);
+			return $this->db->affected_rows() > 0;
+		}
+
+		function delete_antrian($data){
+			$this->db->delete('daftar_berobat', array('NO_PENDAFTARAN' => $data));
 			return $this->db->affected_rows() > 0;
 		}
 	}

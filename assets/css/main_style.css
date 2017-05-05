@@ -11,6 +11,11 @@ a {
 	text-decoration: none;
 }
 
+td a {
+	text-decoration: none;
+	font-size: 10px;
+}
+
 a,a:link,a:visited{
 	color: #4CAF50;
 }
@@ -259,12 +264,51 @@ th {
     background-color: #4CAF50;
     color: white;
 }
-input[type=text] {
+.search_box {
+    width: 10%;
+    min-width: 25%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+td input[type=text] {
     width: 50%;
     min-width: 25%;
     padding: 5px 5px;
     margin: 8px 0;
     box-sizing: border-box;
+}
+
+input[type=text].input_jam{
+    width: 20%;
+    min-width: 1%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=text].input-2{
+    width: 30%;
+    min-width: 1%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+input[type=text].short{
+    width: 15%;
+    min-width: 1%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=text].input-invisible{
+    width: 13%;
+    min-width: 1%;
+    padding: 5px 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
 }
 
 input[type=password] {
@@ -325,4 +369,65 @@ input[type="submit"]{
 	text-align: center;
 	text-decoration: none;
 	border-radius: 4px;
+	display: block;	
+}
+
+.button {
+	float:right;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 10px;
+    margin:0 auto;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.little_text{
+	color: blue;
+	font-size: 12px;
+}
+
+td.img{
+	width: 170px;
+	min-width: 1%;
+}
+
+td img{
+	width: 150px;
+}
+td tr{
+	max-width: 50%;
+}
+
+.tbl_data{
+	text-align: left;
+    padding: 8px;
+    min-width: 1%;
+}
+
+.tbl_data tr:nth-child(odd){background-color: #f2f2f2}
+.tbl_data tr:nth-child(even){background-color: #fAfAfA}
+
+.tbl_data th{
+	width: 3%;
+	min-width: 1%;
+}
+
+.tbl_data td{
+}
+.jadwal {
+
+	border: 1px solid black;
+}
+.jadwal tr td, th{
+	border-left: 1px black solid;
+	border-right: 1px black solid;
+}
+
+.action{
+	font-size: 12px;
 }
