@@ -128,9 +128,10 @@ class petugas_model extends CI_Model{
         function generate_no_antrian($id_jadwal){
            	$this->db->select('*');
 			$this->db->from('daftar_berobat');
-			$this->db->where('TGL_BEROBAT', date('Y-m-d'));
+			$this->db->where('TGL_BEROBAT', date('Y-d-m'));
 			$this->db->where('ID_JADWAL', $id_jadwal);
 			$this->db->where('STATUS', 'Menunggu');
+			$this->db->order_by('NO_ANTRIAN', 'DESC');
 			$list = $this->db->get();
 			if($list->num_rows() == 0){
 				return "1";

@@ -276,7 +276,7 @@
 			}
 		}
 		function get_no_antrian($id_jadwal){
-						$date =date("Y-m-d");
+			$date =date("Y-m-d");
 			$date = date("D", strtotime($date));
 			$hari = array(
 				'Mon' => 'Senin',
