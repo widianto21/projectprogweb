@@ -5,6 +5,9 @@
 			<form action="<?php echo base_url(). 'petugas/tambah_aksi'; ?>" method="post">	
 				<table>
 				<tr>
+					<th colspan="2" class="title"><label>ID Pasien</label></th>
+				</tr>
+				<tr>
 					<td class="title"><label>ID Pasien</label></td>
 					<td><input type="text" name="txtidpasien" value="<?php echo $ID_PASIEN;?>"/></td>
 				</tr>

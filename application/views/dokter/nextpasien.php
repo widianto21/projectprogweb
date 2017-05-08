@@ -57,16 +57,18 @@
 								echo "<tr><td colspan=\"2\">Pasien belum memiliki riwayat berobat</td></tr>";
 							}else{
 								echo "<tr>
-									<th>No. Rekam.</th>
 									<th>Tgl. Berobat</th>
+									<th>Dokter</th>
+									<th>Klinik</th>
 									<th>Keluhan</th>
 									<th>Pengobatan</th>
 									<th>Resep</th>
 								</tr>";
 								foreach ($riwayat as $row) {
 									echo "<tr>
-										<td>".$row['NO_REKAM_MEDIK']."</td>
 										<td>".$row['TGL_BEROBAT']."</td>
+										<td>".$row['NAMA']."</td>
+										<td>".$row['NAMA_POLI']."</td>
 										<td>".$row['KELUHAN']."</td>
 										<td>".$row['PENGOBATAN']."</td>
 										<td>".$row['RESEP']."</td>

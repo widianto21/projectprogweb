@@ -17,8 +17,8 @@
 				<td><input type="text" name="txtIdRekam" readonly="readonly" value="<?php echo $kode_rekam;?>" /></td>
 			</tr>
 			<tr>
-				<td class="title"><label>ID Pasien</label></td>
-				<td><input type="text" name="txtIdPasien" class="input-2" readonly="readonly" value="<?php echo $data_rekam[0]['ID_PASIEN'];?>"/> | <?php echo "Nama : ".$data_rekam[0]['NAMA_PASIEN']." | No. Pendaftar : <input type=\"text\" class=\"input-2\" name=\"txtNoPendaftaran\" readonly=\"readonly\" value=\"". $data_rekam[0]['NO_PENDAFTARAN']."\"";?>
+				<td class="title"><label>Data Pasien</label></td>
+				<td>ID Pasien <input type="text" name="txtIdPasien" class="short" readonly="readonly" value="<?php echo $data_rekam[0]['ID_PASIEN'];?>"/><?php echo "<br/>Nama : ".$data_rekam[0]['NAMA_PASIEN']."<br/>No. Pendaftar : <input type=\"text\" class=\"short\" name=\"txtNoPendaftaran\" readonly=\"readonly\" value=\"". $data_rekam[0]['NO_PENDAFTARAN']."\"";?>
 				</td>
 			</tr>
 			<tr>

@@ -11,10 +11,7 @@
 	<header class="mainheader">
 		<nav>
 			<ul>
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Portifolio</a></li>
-				<li><a href="#">Contact</a></li>
+				<li class="active"><a href="#">Poliklinik</a></li>
 				<li class="logout"><a href="<?php echo base_url();?>users/logout">Logout</a></li>
 			</ul>
 		</nav>		

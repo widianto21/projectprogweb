@@ -395,15 +395,19 @@
 						<th>ID POLI</td>
 						<th>ACTION</td>
 					</tr>";
-			foreach($list as $row){
-				echo "<tr>
-						<td>".$row['ID_DOKTER']."</td>
-						<td>".$row['NAMA']."</td>
-						<td>".$row['ALAMAT']."</td>
-						<td>".$row['NO_TELP']."</td>
-						<td>".$row['NAMA_POLI']."</td>";
-					echo "<td><a href=\"".base_url()."admin/show_jadwal_dokter/".$row['ID_DOKTER']."\">JADWAL</a>|<a href=\"".base_url()."admin/show_update_dokter/".$row['ID_DOKTER']."\">EDIT</a>|<a href=\"".base_url()."admin/delete_data_dokter/".$row['ID_DOKTER']."\" onclick=\"return confirm('Are you sure?')\">DELETE</a></td>";
-				echo "</tr>";
+			if($list != "kosong"){
+				foreach($list as $row){
+					echo "<tr>
+							<td>".$row['ID_DOKTER']."</td>
+							<td>".$row['NAMA']."</td>
+							<td>".$row['ALAMAT']."</td>
+							<td>".$row['NO_TELP']."</td>
+							<td>".$row['NAMA_POLI']."</td>";
+						echo "<td><a href=\"".base_url()."admin/show_jadwal_dokter/".$row['ID_DOKTER']."\">JADWAL</a>|<a href=\"".base_url()."admin/show_update_dokter/".$row['ID_DOKTER']."\">EDIT</a>|<a href=\"".base_url()."admin/delete_data_dokter/".$row['ID_DOKTER']."\" onclick=\"return confirm('Are you sure?')\">DELETE</a></td>";
+					echo "</tr>";
+				}
+			}else{
+				echo "<td colspan=\"6\">Kosong</td>";
 			}
 			echo "</table>";
 		}

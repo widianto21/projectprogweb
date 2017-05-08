@@ -23,7 +23,7 @@
 			}else{
 				$data = array(
 					'NO_REKAM_MEDIK' => $this->input->post('txtIdRekam'),
-					'ID_PASIEN' => $this->input->post('txtIdPasien'),
+					'NO_PENDAFTARAN' => $this->input->post('txtNoPendaftaran'),
 					'TGL_BEROBAT' => date('Y-m-d',strtotime($this->input->post('txtTglBerobat'))),
 					'KELUHAN' => $this->input->post('txtKeluhan'),
 					'PENGOBATAN' => $this->input->post('txtPengobatan'),
@@ -178,7 +178,7 @@
 			$this->load->view('dokter/nav_dokter');
 			if($msg != ""){
 				$data['msg'] ='Pasien Selesai Di Obati, Pasien Selanjutnya';
-				$this->load->view('dokter/editantrian');	
+				$this->load->view('dokter/editantrian', $data);	
 			}else{
 				$this->load->view('dokter/editantrian');	
 			}

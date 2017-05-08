@@ -95,8 +95,12 @@
 
 		function get_riwayat_pasien($id_pasien){
 			$this->db->select('*');
-			$this->db->from('rekam_medik');
-			$this->db->where('ID_PASIEN', $id_pasien);
+			$this->db->from('rekam_medik AS RM');
+			$this->db->join('daftar_berobat as DB', 'RM.NO_PENDAFTARAN = DB.NO_PENDAFTARAN');
+			$this->db->join('jadwal as J', 'DB.ID_JADWAL = J.ID_JADWAL');
+			$this->db->join('dokter as D', 'D.ID_DOKTER = J.ID_DOKTER');
+			$this->db->join('poliklinik as P', 'P.ID_POLI = D.ID_POLI');
+			$this->db->where('DB.ID_PASIEN', $id_pasien);
 			$list = $this->db->get();
 			if($list->num_rows() > 0){
 					return $list->result_array();
